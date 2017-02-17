@@ -53,3 +53,22 @@
 
 * <a href="http://getbootstrap.com/css/">Bootstrap CSS</a>
 * <a href="http://getbootstrap.com/components/">Bootstrap组件</a>
+
+# 安装gulp构建工具
+1. 安装gulp依赖
+
+``
+npm install --save-dev gulp gulp-uglify jshint gulp-jshint gulp-rename
+npm install --save-dev gulp-plumber gulp-connect jshint-stylish gulp-csslint
+``
+
+2. 安装clean-css依赖
+
+``npm install gulp-clean-css  --save-dev
+``
+
+3. 运行gulp命令
+
+``
+gulp
+``
