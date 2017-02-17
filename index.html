@@ -7,16 +7,7 @@
     <meta name="author" content=" FILL ME IN ">
     <title>Cameron Pittman: Portfolio</title>
 
-    <!-- 嗯，web 字体对速度的影响有多大呢？测量一下吧 -->
     <link href="dist/css/style.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-        WebFont.load({
-            google: {
-                families: ['Open+Sans:400,700']
-            }
-        });
-    </script>
     <style type="text/css">
       /* Smartphones (portrait) */
       @media only screen and (max-width: 480px) {
@@ -92,5 +83,19 @@
         <p>&copy; Web Performance 2014 <span id="crp-stats"></span></p>
       </footer>
     </div>
+
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: [ 'Open+Sans:400,700' ] }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })(); </script>
   </body>
 </html>
