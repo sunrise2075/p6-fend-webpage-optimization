@@ -33,7 +33,8 @@ gulp.task('clean-css', function() {
             console.log(details.name + ': ' + details.stats.originalSize);
             console.log(details.name + ': ' + details.stats.minifiedSize);
         }))
-        .pipe(gulp.dest('dist/css/'));
+        .pipe(gulp.dest('dist/css/'))
+        .pipe(connect.reload());;
 });
 
 gulp.task('jshint', function(){
