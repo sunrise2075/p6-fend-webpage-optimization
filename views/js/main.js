@@ -13,6 +13,15 @@ Cameron Pittman, Udacity 课程开发者
 cameron@udacity.com
 */
 
+//some major constant as global variables
+var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
+var pizzaContainers = document.querySelectorAll(".randomPizzaContainer");
+var containerOffSetWidth = pizzaContainers[0].offsetWidth;
+window.onresize = function(){
+    windowWidth = document.querySelector("#randomPizzas").offsetWidth;
+    containerOffSetWidth = pizzaContainers[0].offsetWidth;
+};
+
 // 你可能已经发现了，这个网站会随机地生成披萨。
 // 下面的数组是所有可能组成披萨的原料。
 var pizzaIngredients = {};
@@ -443,11 +452,7 @@ function determineDx (oldWidth, size, windowWidth) {
 
 // 遍历披萨的元素并改变它们的宽度
 function changePizzaImageSizes(size) {
-    var pizzaContainers = document.querySelectorAll(".randomPizzaContainer");
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
     var container = null;
-    //all containers are of the same size
-    var containerOffSetWidth = pizzaContainers[0].offsetWidth;
     for (var i = 0; i < pizzaContainers.length; i++) {
         container = pizzaContainers[i];
         var dx = determineDx(containerOffSetWidth, size, windowWidth);
