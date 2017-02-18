@@ -54,7 +54,7 @@
 * <a href="http://getbootstrap.com/css/">Bootstrap CSS</a>
 * <a href="http://getbootstrap.com/components/">Bootstrap组件</a>
 
-# 安装gulp构建工具
+# 在开发流程安装gulp构建工具
 1. 安装gulp依赖
 
 ``
@@ -72,3 +72,17 @@ npm install --save-dev gulp-plumber gulp-connect jshint-stylish gulp-csslint
 ``
 gulp
 ``
+
+# 使用轻量级的http-server启动项目
+
+## 设定HTTP响应头的缓存控制时间为31天
+
+   计算公式：3600sec * 24 *30 = 22678400sec
+   在命令行输入以下命令：
+
+``
+http-server -c22678400
+``
+
+
+
