@@ -509,15 +509,15 @@ function logAverageFrame(times) {   // times参数是updatePositions()由User Ti
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // 基于滚动条位置移动背景中的披萨滑窗
-function updatePositions() {
+function updatePositions(scrollTop) {
   frame++;
   window.performance.mark("mark_start_frame");
-  
+
   var scrollTop = document.body.scrollTop;
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     //no more read operation on document.body.scrollTop
-      console.log("getComputedStyle(document.body, null).scrollTop:"+ getComputedStyle(document.body, null).scrollTop);
+
     var phase = Math.sin((scrollTop / 1250) + (i % 5));
     items[i].style.left = (i % 8) * 256 + 100 * phase + 'px';
   }
