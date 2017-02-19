@@ -21,6 +21,17 @@ window.onresize = function(){
     windowWidth = document.querySelector("#randomPizzas").offsetWidth;
     containerOffSetWidth = pizzaContainers[0].offsetWidth;
 };
+//define a template for pizzaContainer creation
+var pizzaContainerTpl =
+    "<div class='randomPizzaContainer' style='width:33.33%;height:325px;' id='pizza{{index}}'>"
+    +"<div>"
+    +"<img src='images/pizza.png' class='img-responsive' style='width:35%;'/>"
+    +"<div></div>"
+    +"</div>"
+    +"<div><h4>{{randomName}}</h4>"
+    +"<ul>{{makeRandomPizza}}</ul>"
+    +"</div>";
+"</div>";
 
 // 你可能已经发现了，这个网站会随机地生成披萨。
 // 下面的数组是所有可能组成披萨的原料。
@@ -366,40 +377,10 @@ var makeRandomPizza = function() {
 
 // 为每个披萨分别返回一个DOM元素
 var pizzaElementGenerator = function(i) {
-  var pizzaContainer,             // 披萨的名称、图片及原料清单容器
-      pizzaImageContainer,        // 披萨图片容器
-      pizzaImage,                 // 披萨的图片
-      pizzaDescriptionContainer,  // 披萨名称及原料清单容器
-      pizzaName,                  // 披萨名称
-      ul;                         // 原料清单
 
-  pizzaContainer = document.createElement("div");
-  pizzaImageContainer = document.createElement("div");
-  pizzaImage = document.createElement("img");
-  pizzaDescriptionContainer = document.createElement("div");
-
-  pizzaContainer.classList.add("randomPizzaContainer");
-  pizzaContainer.style.width = "33.33%";
-  pizzaContainer.style.height = "325px";
-  pizzaContainer.id = "pizza" + i;                // 给每个披萨元素赋一个独一无二的id
-  pizzaImageContainer.style.width="35%";
-
-  pizzaImage.src = "images/pizza.png";
-  pizzaImage.classList.add("img-responsive");
-  pizzaImageContainer.appendChild(pizzaImage);
-  pizzaContainer.appendChild(pizzaImageContainer);
-
-
-  pizzaDescriptionContainer.style.width="65%";
-
-  pizzaName = document.createElement("h4");
-  pizzaName.innerHTML = randomName();
-  pizzaDescriptionContainer.appendChild(pizzaName);
-
-  ul = document.createElement("ul");
-  ul.innerHTML = makeRandomPizza();
-  pizzaDescriptionContainer.appendChild(ul);
-  pizzaContainer.appendChild(pizzaDescriptionContainer);
+    var pizzaContainer = pizzaContainerTpl.replace("{{index}}", i)
+        .replace("{{randomName}}",randomName)
+        .replace("{{makeRandomPizza}}", makeRandomPizza);
 
   return pizzaContainer;
 };
@@ -477,9 +458,11 @@ window.performance.mark("mark_start_generating"); // 收集timing数据
 
 // 这个for循环在页面加载时创建并插入了所有的披萨
 var pizzasDiv = document.getElementById("randomPizzas");
+var pizzaString = "";
 for (var i = 2; i < 100; i++) {
-  pizzasDiv.appendChild(pizzaElementGenerator(i));
+  pizzaString += pizzaElementGenerator(i);
 }
+pizzaString.innerHTML = pizzaString;
 
 // 使用User Timing API。这里的测量数据告诉了你生成初始的披萨用了多长时间
 window.performance.mark("mark_end_generating");
