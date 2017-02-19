@@ -513,7 +513,6 @@ function updatePositions(scrollTop) {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var scrollTop = document.body.scrollTop;
   var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
     //no more read operation on document.body.scrollTop
@@ -532,9 +531,27 @@ function updatePositions(scrollTop) {
   }
 }
 
+// 使用 window.requestAnimationFrame 优化 Scroll 处理性能
+// 替换window.addEventListener('scroll', updatePositions);的时间邦定方法
+// Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
 
-// 在页面滚动时运行updatePositions函数
-window.addEventListener('scroll', updatePositions);
+var last_known_scroll_position = 0;
+var ticking = false;
+
+function doSomething(scroll_pos) {
+    updatePositions(scroll_pos);
+}
+
+window.addEventListener('scroll', function(e) {
+    last_known_scroll_position = window.scrollY;
+    if (!ticking) {
+        window.requestAnimationFrame(function() {
+            doSomething(last_known_scroll_position);
+            ticking = false;
+        });
+    }
+    ticking = true;
+});
 
 // 当页面加载时生成披萨滑窗
 document.addEventListener('DOMContentLoaded', function() {
