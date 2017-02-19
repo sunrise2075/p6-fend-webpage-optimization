@@ -40,7 +40,7 @@ var initMovingPizzas = function(){
         var singlePizzaHTML =
             "<img class='mover' " +
             "src='images/pizza.png' " +
-            "style='sheight:100px;width:73.333px;top:"
+            "style='height:100px;width:73.333px;top:"
             + pizzaTop
             +
             ";'/>";
