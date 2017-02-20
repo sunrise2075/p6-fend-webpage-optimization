@@ -15,7 +15,6 @@ cameron@udacity.com
 
 //some major constant as global variables
 var pizzaContainers ;
-var containerOffSetWidth ;
 
 //define a template for pizzaContainer creation
 var pizzaContainerTpl =
@@ -40,7 +39,7 @@ var initMovingPizzas = function(){
         var singlePizzaHTML =
             "<img class='mover' " +
             "src='images/pizza.png' " +
-            "style='height:100px;width:73.333px;top:"
+            "style='sheight:100px;width:73.333px;top:"
             + pizzaTop
             +
             ";'/>";
@@ -453,10 +452,11 @@ function determineDx (oldWidth, size) {
 
 // 遍历披萨的元素并改变它们的宽度
 function changePizzaImageSizes(size) {
+    var containerOffSetWidth = getComputedStyle(container, null).offsetWidth;
     var container = null;
     for (var i = 0; i < pizzaContainers.length; i++) {
         container = pizzaContainers[i];
-        var containerOffSetWidth = getComputedStyle(container, null).offsetWidth;
+
         var dx = determineDx(containerOffSetWidth, size);
         var newwidth = (containerOffSetWidth + dx) + 'px';
         container.style.width = newwidth;
