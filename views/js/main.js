@@ -356,31 +356,34 @@ var selectRandomCrust = function() {
 };
 
 var ingredientItemizer = function(string) {
-  return "<li>" + string + "</li>";
+    var liEl = document.createElement("li");
+    var textNode = document.createTextNode(string);
+    liEl.appendChild(textNode);
+  return liEl;
 };
 
 // 返回嵌套在<li>中的披萨原料字符串
 var makeRandomPizza = function() {
-  var pizza = "";
+  var pizza = document.createDocumentFragment();
 
   var numberOfMeats = Math.floor((Math.random() * 4));
   var numberOfNonMeats = Math.floor((Math.random() * 3));
   var numberOfCheeses = Math.floor((Math.random() * 2));
 
   for (var i = 0; i < numberOfMeats; i++) {
-    pizza = pizza + ingredientItemizer(selectRandomMeat());
+    pizza.appendChild(ingredientItemizer(selectRandomMeat())) ;
   }
 
   for (var j = 0; j < numberOfNonMeats; j++) {
-    pizza = pizza + ingredientItemizer(selectRandomNonMeat());
+      pizza.appendChild(ingredientItemizer(selectRandomNonMeat()));
   }
 
   for (var k = 0; k < numberOfCheeses; k++) {
-    pizza = pizza + ingredientItemizer(selectRandomCheese());
+    pizza.appendChild(ingredientItemizer(selectRandomCheese()));
   }
 
-  pizza = pizza + ingredientItemizer(selectRandomSauce());
-  pizza = pizza + ingredientItemizer(selectRandomCrust());
+  pizza.appendChild(ingredientItemizer(selectRandomSauce()));
+  pizza.appendChild(ingredientItemizer(selectRandomCrust()));
 
   return pizza;
 };
@@ -415,7 +418,7 @@ var pizzaElementGenerator = function(i) {
     pizzaName.appendChild(randomName()) ;
     pizzaDescriptionContainer.appendChild(pizzaName);
     ul = document.createElement("ul");
-    ul.innerHTML = makeRandomPizza();
+    ul.appendChild(makeRandomPizza());
     pizzaDescriptionContainer.appendChild(ul);
     pizzaContainer.appendChild(pizzaDescriptionContainer);
 
