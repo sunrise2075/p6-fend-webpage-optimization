@@ -34,6 +34,7 @@ form {
         width: 256px;
         z-index: -1;
         will-change: transform;
+        transform: translateZ(0);
         backface-visibility: hidden;
 }
 

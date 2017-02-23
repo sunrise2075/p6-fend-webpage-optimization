@@ -325,7 +325,8 @@ function generator(adj, noun) {
 function randomName() {
   var randomNumberAdj = parseInt(Math.random() * adjectives.length);
   var randomNumberNoun = parseInt(Math.random() * nouns.length);
-  return generator(adjectives[randomNumberAdj], nouns[randomNumberNoun]);
+  var pizzaName = generator(adjectives[randomNumberAdj], nouns[randomNumberNoun]);
+  return document.createTextNode(pizzaName);
 }
 
 // 这些函数从各自的原料目录中取出并返回随机的原料
@@ -387,9 +388,6 @@ var makeRandomPizza = function() {
 // 为每个披萨分别返回一个DOM元素
 var pizzaElementGenerator = function(i) {
 
-    // var pizzaContainer = pizzaContainerTpl.replace("{{index}}", i)
-    //                       .replace("{{randomName}}",randomName)
-    //                       .replace("{{makeRandomPizza}}", makeRandomPizza());
     var pizzaContainer,             // 披萨的名称、图片及原料清单容器
         pizzaImageContainer,        // 披萨图片容器
         pizzaImage,                 // 披萨的图片
@@ -398,27 +396,24 @@ var pizzaElementGenerator = function(i) {
         ul;                         // 原料清单
 
     pizzaContainer = document.createElement("div");
-    pizzaImageContainer = document.createElement("div");
-    pizzaImage = document.createElement("img");
-    pizzaDescriptionContainer = document.createElement("div");
-
     pizzaContainer.classList.add("randomPizzaContainer");
     pizzaContainer.classList.add("mediaPizza");
-    pizzaContainer.id = "pizza" + i;                // 给每个披萨元素赋一个独一无二的id
-    pizzaImageContainer.style.width="35%";
+    // 给每个披萨元素赋一个独一无二的id
+    pizzaContainer.id = "pizza" + i;
 
+    pizzaImageContainer = document.createElement("div");
+    pizzaImage = document.createElement("img");
     pizzaImage.src = "images/pizza.png";
     pizzaImage.classList.add("img-responsive");
+    pizzaImageContainer.style.width="35%";
     pizzaImageContainer.appendChild(pizzaImage);
     pizzaContainer.appendChild(pizzaImageContainer);
 
-
+    pizzaDescriptionContainer = document.createElement("div");
     pizzaDescriptionContainer.style.width="65%";
-
     pizzaName = document.createElement("h4");
-    pizzaName.innerHTML = randomName();
+    pizzaName.appendChild(randomName()) ;
     pizzaDescriptionContainer.appendChild(pizzaName);
-
     ul = document.createElement("ul");
     ul.innerHTML = makeRandomPizza();
     pizzaDescriptionContainer.appendChild(ul);
@@ -470,6 +465,7 @@ function changePizzaImageSizes() {
     var size = sizeSlider.value;
     var container = null;
 
+    pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
     var className = classNameSwitcher(size);
     for (var i = 0; i < pizzaContainers.length; i++) {
         container = pizzaContainers[i];
@@ -543,9 +539,10 @@ function updatePositions(scrollTop) {
     }
 
   var movingPizzaItems = document.getElementsByClassName('mover');
-  for (var i = 0; i < movingPizzaItems.length; i++) {
+    var itemsLength = movingPizzaItems.length;
+  for (var i = 0; i < itemsLength; i++) {
      var leftOffSet = movingPizzaItems[i].basicLeft + 100 * phaseArr[i%5] + 'px';
-      movingPizzaItems[i].style.left = leftOffSet;
+      movingPizzaItems[i].style.transform = "translateX(" + leftOffSet +")";
   }
 
   // 再次使用User Timing API。这很值得学习
@@ -583,5 +580,4 @@ window.addEventListener('scroll', function(e) {
 // 当页面加载时生成披萨滑窗
 document.addEventListener('DOMContentLoaded', function() {
     initMovingPizzas();
-    pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
 });
