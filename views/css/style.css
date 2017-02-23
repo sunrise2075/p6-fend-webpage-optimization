@@ -37,10 +37,37 @@ form {
         backface-visibility: hidden;
 }
 
+/*
 .randomPizzaContainer {
   float: left;
   display: flex;
 }
+*/
+
+/*
+use class name to control pizza size
+*/
+.randomPizzaContainer.smallPizza{
+    float: left;
+    display: flex;
+    width: 25%;
+    height: 325px;
+}
+
+.randomPizzaContainer.mediaPizza {
+    float: left;
+    display: flex;
+    width: 33.33%;
+    height: 325px;
+}
+
+.randomPizzaContainer.largePizza {
+    float: left;
+    display: flex;
+    width: 50%;
+    height: 325px;
+}
+
 
 .randomPizzaContainer:after {
   content: "";
@@ -52,20 +79,3 @@ form {
   background-color: rgba(240, 60, 60, 0.8);
 }
 
- /*
- use class name to control pizza size
- */
- .smallPizza{
-     width: 25%;
-     height: 325px;
- }
-
-.mediaPizza {
-    width: 33.33%;
-    height: 325px;
-}
-
-.largePizza {
-    width: 50%;
-    height: 325px;
-}

@@ -20,9 +20,6 @@ var pizzaContainers ;
 //reduce the number of moving pizzas from 200 to 30
 var numOfMovingPizzas = 30;
 
-//cache winWidth4RandomPizzas for resizing pizzas
-var winWidth4RandomPizzas;
-
 
 var sizeSlider = document.getElementById("sizeSlider");
 
@@ -40,7 +37,7 @@ var initMovingPizzas = function(){
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
         movingPizzas1.appendChild(elem);
     }
-    updatePositions(document.body.scrollTop);
+    updatePositions(last_known_scroll_position);
 };
 
 
@@ -498,10 +495,12 @@ window.performance.mark("mark_start_generating"); // 收集timing数据
 // 这个for循环在页面加载时创建并插入了所有的披萨
 //cache randomPizzasDiv as a global variable
 var randomPizzasDiv = document.getElementById("randomPizzas");
-
+//use document fragment to cache the newly generated node and avoid to touch live dom tree
+var fragment = document.createDocumentFragment();
 for (var i = 2; i < 100; i++) {
-    randomPizzasDiv.appendChild(pizzaElementGenerator(i));
+    fragment.appendChild(pizzaElementGenerator(i));
 }
+randomPizzasDiv.appendChild(fragment);
 
 // 使用User Timing API。这里的测量数据告诉了你生成初始的披萨用了多长时间
 window.performance.mark("mark_end_generating");
@@ -562,7 +561,6 @@ function updatePositions(scrollTop) {
 // 使用 window.requestAnimationFrame 优化 Scroll 处理性能
 // 替换window.addEventListener('scroll', updatePositions);的时间邦定方法
 // Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
-
 var last_known_scroll_position = 0;
 var ticking = false;
 
@@ -581,13 +579,9 @@ window.addEventListener('scroll', function(e) {
     ticking = true;
 });
 
-window.addEventListener('resize',function(){
-    winWidth4RandomPizzas = randomPizzasDiv.offsetWidth;
-});
 
 // 当页面加载时生成披萨滑窗
 document.addEventListener('DOMContentLoaded', function() {
     initMovingPizzas();
-    winWidth4RandomPizzas = randomPizzasDiv.offsetWidth;
     pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
 });
