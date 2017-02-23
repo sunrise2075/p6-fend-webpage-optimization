@@ -30,9 +30,11 @@ form {
 }
 
 .mover {
-  position: fixed;
-  width: 256px;
-  z-index: -1;
+        position: fixed;
+        width: 256px;
+        z-index: -1;
+        will-change: transform;
+        backface-visibility: hidden;
 }
 
 .randomPizzaContainer {
@@ -48,4 +50,19 @@ form {
 
  .container {
   background-color: rgba(240, 60, 60, 0.8);
+}
+
+ .smallPizza{
+     width: 25%;
+     height: 325px;
+ }
+
+.mediaPizza {
+    width: 33.33%;
+    height: 325px;
+}
+
+.largePizza {
+    width: 50%;
+    height: 325px;
 }
