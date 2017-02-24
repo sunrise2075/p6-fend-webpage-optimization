@@ -543,9 +543,11 @@ function updatePositions(scrollTop) {
 
   var movingPizzaItems = document.getElementsByClassName('mover');
     var itemsLength = movingPizzaItems.length;
+
   for (var i = 0; i < itemsLength; i++) {
-     var leftOffSet = movingPizzaItems[i].basicLeft + 100 * phaseArr[i%5] + 'px';
-      movingPizzaItems[i].style.left = leftOffSet;
+       var leftOffSet = movingPizzaItems[i].basicLeft + 100 * phaseArr[i%5] + 'px';
+      
+      movingPizzaItems[i].style.transform = "translate("+ leftOffSet + ")";
   }
 
   // 再次使用User Timing API。这很值得学习
