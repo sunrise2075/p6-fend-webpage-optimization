@@ -77,22 +77,18 @@ http-server -c22678400
 
     使用 window.requestAnimationFrame 优化Scroll 处理性能
     
-
-## 2.2 为updatePositions函数增加参数
-
-    updatePositions函数将从外界接收一个代表当前窗口滚动的数字参数
     
-## 2.3 避免在for循环里面反复查询同一个DOM元素
+## 2.2 避免在for循环里面反复查询同一个DOM元素
 
     把movingPizzaItems元素查询移出for循环
     
-## 2.4 减少发生在for循环里的计算量
+## 2.3 减少发生在for循环里的计算量
 
     新建phaseArr，在for循环外一次完成phase参数计算
     
-## 2.5 缓存movingPizzaItems集合length属性
+## 2.4 缓存movingPizzaItems集合length属性
 
-## 2.6 在pizza.html中修改movingPizzas1元素位置：
+## 2.5 在pizza.html中修改movingPizzas1元素位置：
 
     修改后的样子是：
     
@@ -103,7 +99,7 @@ http-server -c22678400
           </div>
         </div>
 
-## 2.7 更新对象位置:用style.transform属性替换style.left
+## 2.6 更新对象位置:用style.transform属性替换style.left
 
     修改后的样子是：
     

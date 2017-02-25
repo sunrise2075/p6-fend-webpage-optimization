@@ -473,6 +473,8 @@ function changePizzaImageSizes() {
         container = pizzaContainers[i];
         container.className = className;
     }
+
+    requestAnimationFrame(changePizzaImageSizes);
 }
 
 var resizePizzas = function(size) {
@@ -527,14 +529,14 @@ function logAverageFrame(times) {   // times参数是updatePositions()由User Ti
 
 
 // 基于滚动条位置移动背景中的披萨滑窗
-function updatePositions(scrollTop) {
+function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
     //use scrollTop to create a phase array
     //avoid unnecessary computation
     var phaseArr = [];
-    var topVal = scrollTop / 1250;
+    var topVal = last_known_scroll_position / 1250;
     for(var i =0; i< 5; i++){
         var phase = Math.sin(topVal + i );
         phaseArr.push(phase);
@@ -548,6 +550,8 @@ function updatePositions(scrollTop) {
 
       movingPizzaItems[i].style.transform = "translate("+ leftOffSet + ")";
   }
+
+  window.requestAnimationFrame(updatePositions);
 
   // 再次使用User Timing API。这很值得学习
   // 能够很容易地自定义测量维度
@@ -569,7 +573,7 @@ window.addEventListener('scroll', function(e) {
     last_known_scroll_position = window.scrollY;
     if (!ticking) {
         window.requestAnimationFrame(function() {
-            updatePositions(last_known_scroll_position);
+            updatePositions();
             ticking = false;
         });
     }
