@@ -39,7 +39,9 @@ gulp
 
     把PageSpeed站点处理过的压缩版图片放到img目录下面，主要有：
     
-    profilepic.jpg
+    img/profilepic.jpg
+    
+    views/images/pizzeria.jpg
 
 
 ## 使用http-server启动项目
@@ -53,9 +55,61 @@ gulp
 http-server -c22678400
 ``
 
-# Part 2: 优化 pizza.html 的FPS (每秒帧数)
+# 优化 pizza.html 的FPS (每秒帧数)
 
-## 优化窗口滚动事件
+## 1. 高效地查询页面元素
+
+    mian.js文件主要用到了下面的方法选取页面元素：
+    
+    elementList = document.querySelectorAll(selectors);
+    
+    更好的方法是：
+    
+    element = document.getElementById(idString)
+    
+    和
+    
+    element = document.getElementsByClassName(className)
+
+## 2.优化窗口滚动事件
+
+## 2.1 优化Scroll 处理性能
+
+    使用 window.requestAnimationFrame 优化Scroll 处理性能
+    
+
+## 2.2 为updatePositions函数增加参数
+
+    updatePositions函数将从外界接收一个代表当前窗口滚动的数字参数
+    
+## 2.3 避免在for循环里面反复查询同一个DOM元素
+
+    把movingPizzaItems元素查询移出for循环
+    
+## 2.4 减少发生在for循环里的计算量
+
+    新建phaseArr，在for循环外一次完成phase参数计算
+    
+## 2.5 缓存movingPizzaItems集合length属性
+
+## 2.6 在pizza.html中修改movingPizzas1元素位置：
+
+    修改后的样子是：
+    
+    
+        <!-- move movingPizzas1 to its own row in grid system -->
+        <div  class="row">
+          <div id="movingPizzas1" class="col-md-12">
+          </div>
+        </div>
+
+## 2.7 更新对象位置:用style.transform属性替换style.left
+
+    修改后的样子是：
+    
+    
+    movingPizzaItems[i].style.transform = "translate("+ leftOffSet + ")";
+
 
 ## 优化resizePizza过程
 
