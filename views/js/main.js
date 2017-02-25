@@ -546,7 +546,7 @@ function updatePositions(scrollTop) {
 
   for (var i = 0; i < itemsLength; i++) {
        var leftOffSet = movingPizzaItems[i].basicLeft + 100 * phaseArr[i%5] + 'px';
-      
+
       movingPizzaItems[i].style.transform = "translate("+ leftOffSet + ")";
   }
 
