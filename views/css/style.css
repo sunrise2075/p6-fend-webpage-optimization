@@ -38,6 +38,11 @@ form {
         backface-visibility: hidden;
 }
 
+.randomPizzaContainer {
+    float: left;
+    display: flex;
+}
+
 /*
 .randomPizzaContainer {
   float: left;
@@ -48,23 +53,17 @@ form {
 /*
 use class name to control pizza size
 */
-.randomPizzaContainer.smallPizza{
-    float: left;
-    display: flex;
+.smallPizza{
     width: 25%;
     height: 325px;
 }
 
-.randomPizzaContainer.mediaPizza {
-    float: left;
-    display: flex;
+.mediaPizza {
     width: 33.33%;
     height: 325px;
 }
 
-.randomPizzaContainer.largePizza {
-    float: left;
-    display: flex;
+.largePizza {
     width: 50%;
     height: 325px;
 }

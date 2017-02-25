@@ -111,6 +111,28 @@ http-server -c22678400
     movingPizzaItems[i].style.transform = "translate("+ leftOffSet + ")";
 
 
-## 优化resizePizza过程
+## 3.优化resizePizza过程
+
+### 3.1 优化比萨饼创建方法
+
+    把原来用字符串拼接innerHTML的方法改为直接用javascript方法创建DOM节点
+
+### 3.2 修改pizzaElementGenerator方法
+
+    为比萨饼设置默认尺寸的className属性
+
+### 3.3 为三种尺寸的比萨饼分别定义样式
+
+    具体参考views\css\style.css文件56行~69行
+    
+### 3.4 优化披萨饼图片尺寸切换动画
+
+    使用window.requestAnimationFrame调用changePizzaImageSizes函数
+    
+### 3.5 用className控制比萨饼尺寸
+
+    具体参考\views\js\main.js第474行
+
+    
 
 

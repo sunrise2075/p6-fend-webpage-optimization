@@ -428,24 +428,23 @@ var pizzaElementGenerator = function(i) {
 // 当网站中"Our Pizzas"的滑窗部分移动时调用resizePizzas(size)函数
 
 // 改变滑窗前披萨的尺寸值
-function changePizzaSizeOnSliderValueChange(size) {
+function changePizzaSize(size) {
 
-    var pizzaSizeEl = document.getElementById("pizzaSize");
+    var pizzaSizeLabel = document.getElementById("pizzaSize");
 
     switch(size) {
         case "1":
-            pizzaSizeEl.innerHTML = "Small";
+            pizzaSizeLabel.innerHTML = "Small";
             break;
         case "2":
-            pizzaSizeEl.innerHTML = "Medium";
+            pizzaSizeLabel.innerHTML = "Medium";
             break;
         case "3":
-            pizzaSizeEl.innerHTML = "Large";
+            pizzaSizeLabel.innerHTML = "Large";
             break;
         default:
-            console.log("bug in changePizzaSizeOnSliderValueChange");
+            console.log("bug in changePizzaSize");
     }
-
      requestAnimationFrame(changePizzaImageSizes);
 }
 
@@ -479,7 +478,7 @@ function changePizzaImageSizes() {
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API 函数
 
-  changePizzaSizeOnSliderValueChange(size);
+  changePizzaSize(size);
   // User Timing API 太棒了
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
