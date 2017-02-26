@@ -445,7 +445,8 @@ function changePizzaSize(size) {
         default:
             console.log("bug in changePizzaSize");
     }
-    changePizzaImageSizes();
+    //tell the browser to manage the upcoming animation function
+    window.requestAnimationFrame(changePizzaImageSizes);
 }
 
 // 为不同尺寸的披萨元素由一个尺寸改成另一个尺寸应用不同的class name
@@ -561,7 +562,8 @@ function updatePositions() {
 
 // 使用 window.requestAnimationFrame 优化 Scroll 处理性能
 // 替换window.addEventListener('scroll', updatePositions);的时间邦定方法
-// Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
+//Reference:1. https://developer.mozilla.org/zh-CN/docs/Web/Events/scroll
+//          2. http://www.html5rocks.com/en/tutorials/speed/animations/
 var scrollTop = 0;
 var ticking = false;
 
@@ -569,6 +571,7 @@ window.addEventListener('scroll', function(e) {
     scrollTop = window.scrollY;
     if (!ticking) {
         window.requestAnimationFrame(function() {
+            //call the function only once
             updatePositions();
             ticking = false;
         });
