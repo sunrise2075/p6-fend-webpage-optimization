@@ -445,7 +445,7 @@ function changePizzaSize(size) {
         default:
             console.log("bug in changePizzaSize");
     }
-    //tell the browser to manage the upcoming animation function
+    //tell the browser to handle the upcoming animation function
     window.requestAnimationFrame(changePizzaImageSizes);
 }
 
@@ -570,8 +570,8 @@ var ticking = false;
 window.addEventListener('scroll', function(e) {
     scrollTop = window.scrollY;
     if (!ticking) {
+        //tell the browser to handle the upcoming animation function
         window.requestAnimationFrame(function() {
-            //call the function only once
             updatePositions();
             ticking = false;
         });
