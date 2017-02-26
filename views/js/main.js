@@ -37,7 +37,7 @@ var initMovingPizzas = function(){
         elem.style.top = (Math.floor(i / cols) * s) + 'px';
         movingPizzas1.appendChild(elem);
     }
-    updatePositions(last_known_scroll_position);
+    updatePositions(scrollTop);
 };
 
 
@@ -445,7 +445,7 @@ function changePizzaSize(size) {
         default:
             console.log("bug in changePizzaSize");
     }
-     requestAnimationFrame(changePizzaImageSizes);
+    changePizzaImageSizes();
 }
 
 // 为不同尺寸的披萨元素由一个尺寸改成另一个尺寸应用不同的class name
@@ -473,8 +473,6 @@ function changePizzaImageSizes() {
         container = pizzaContainers[i];
         container.className = className;
     }
-
-    requestAnimationFrame(changePizzaImageSizes);
 }
 
 var resizePizzas = function(size) {
@@ -536,7 +534,7 @@ function updatePositions() {
     //use scrollTop to create a phase array
     //avoid unnecessary computation
     var phaseArr = [];
-    var topVal = last_known_scroll_position / 1250;
+    var topVal = scrollTop / 1250;
     for(var i =0; i< 5; i++){
         var phase = Math.sin(topVal + i );
         phaseArr.push(phase);
@@ -551,8 +549,6 @@ function updatePositions() {
       movingPizzaItems[i].style.transform = "translate("+ leftOffSet + ")";
   }
 
-  window.requestAnimationFrame(updatePositions);
-
   // 再次使用User Timing API。这很值得学习
   // 能够很容易地自定义测量维度
   window.performance.mark("mark_end_frame");
@@ -566,11 +562,11 @@ function updatePositions() {
 // 使用 window.requestAnimationFrame 优化 Scroll 处理性能
 // 替换window.addEventListener('scroll', updatePositions);的时间邦定方法
 // Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
-var last_known_scroll_position = 0;
+var scrollTop = 0;
 var ticking = false;
 
 window.addEventListener('scroll', function(e) {
-    last_known_scroll_position = window.scrollY;
+    scrollTop = window.scrollY;
     if (!ticking) {
         window.requestAnimationFrame(function() {
             updatePositions();
