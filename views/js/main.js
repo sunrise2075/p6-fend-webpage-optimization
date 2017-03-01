@@ -27,8 +27,9 @@ var initMovingPizzas = function(){
     var movingPizzas1 = document.getElementById("movingPizzas1");
     var cols = 8;
     var s = 256;
+    var elem ;//declare variable outside the for loop
     for (var i = 0; i < numOfMovingPizzas; i++) {
-        var elem = document.createElement('img');
+        elem = document.createElement('img');
         elem.className = 'mover';
         elem.src = "images/pizza.png";
         elem.style.height = "100px";
@@ -536,8 +537,9 @@ function updatePositions() {
     //avoid unnecessary computation
     var phaseArr = [];
     var topVal = scrollTop / 1250;
+    var phase;//declare common variable outside the for loop
     for(var i =0; i< 5; i++){
-        var phase = Math.sin(topVal + i );
+        phase = Math.sin(topVal + i );
         phaseArr.push(phase);
     }
 
